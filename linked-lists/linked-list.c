@@ -20,6 +20,10 @@ void printLinkedList(LList * list) {
     Node * head = list->head;
     Node * currentNode = head;
 
+    if (list->size == 0) {
+        printf("The list is empty\n");
+    }
+
     int count = 1;
 
     while(currentNode) {
@@ -44,7 +48,66 @@ void append(struct LList * list, int value) {
     // Add the new node 
     if(current->next == NULL) {
         current->next = newNode;
-        list->size = list->size++;
+        list->size = list->size + 1;
     }
     return;
+}
+
+void preppend(LList * list, int value) {
+    Node * current = list->head;
+    Node * newNode = createNode(value);
+
+    // Set new node as head
+    newNode->next = list->head;
+    list->head = newNode;
+    list->size = list->size + 1;
+    return;
+}
+
+int unstack(LList * list) {
+    Node * nodeToDelete = list->head;
+    int returnValue = nodeToDelete->value;
+
+    // Set new head
+    list->head = list->head->next;
+    // Delete previous node from memory
+    free(nodeToDelete);
+    // Set new list size
+    list->size = list->size - 1;
+
+    return returnValue;
+}
+
+int unqueue(LList * list) {
+    Node * current = list->head;
+    Node * newTail = NULL;
+    int returnValue;
+
+    if (list->size == 0) return 0;
+
+    if (list->size == 1) {
+        returnValue = list->head->value;
+        free(list->head);
+        list->head = NULL;
+        list->size = 0;
+        return returnValue;
+    }
+
+    // Find the last node
+    while(current->next != NULL) {
+        if(current->next->next == NULL) {
+            newTail = current;
+        }
+        current = current->next;
+    }
+
+    returnValue = current->value;
+    // New tail next set to NULL
+    newTail->next = NULL;
+    // Delete previous node from memory
+    free(current);
+    // Set new list size
+    list->size = list->size - 1;
+
+    return returnValue;
 }

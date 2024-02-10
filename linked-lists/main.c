@@ -4,18 +4,34 @@
 
 int main(void) {
 
-    Node * node1 = createNode(25);
-    Node * node2 = createNode(17);
+    LList * list1 = createLinkedList(5);
 
-    LList * list1 = createLinkedList(45);
-
-    printf("Node1: %d\n", node1->value);
-    printf("Node2: %d\n", node2->value);
-
+    preppend(list1, 15);
     append(list1, 22);
+    unstack(list1);
     append(list1, 33);
+    preppend(list1, 75);
     append(list1, 44);
+    append(list1, 45);
+    unqueue(list1);
+    append(list1, 46);
+    
     printLinkedList(list1);
+    printf("LList size: %d\n", list1->size);
+
+    unqueue(list1);
+    unqueue(list1);
+    unqueue(list1);
+    unqueue(list1);
+    unqueue(list1);
+
+    printLinkedList(list1);
+    printf("LList size: %d\n", list1->size);
+
+    unqueue(list1);
+
+    printLinkedList(list1);
+    printf("LList size: %d\n", list1->size);
 
     return 0;
 }

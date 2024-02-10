@@ -19,5 +19,9 @@ Node * createNode(int value);
 LList * createLinkedList(int headValue);
 void printLinkedList(LList * list);
 void append(LList * list, int value);
+void preppend(LList * list, int value);
+// Returns value type of Node
+int unstack(LList *);   // Takes the head of the list
+int unqueue(LList *);   // Takes the tail of the list
 
 #endif
