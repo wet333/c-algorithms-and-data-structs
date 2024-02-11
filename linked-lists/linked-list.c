@@ -31,7 +31,8 @@ void printLinkedList(LList * list) {
         if (currentNode->next == NULL) {
             break;
         }
-        currentNode = currentNode->next;        
+        currentNode = currentNode->next;
+        count++;   
     }
     return;
 }
@@ -39,6 +40,12 @@ void printLinkedList(LList * list) {
 void append(struct LList * list, int value) {
     Node * current = list->head;
     Node * newNode = createNode(value);
+
+    if(list->size == 0) {
+        list->head = newNode;
+        list->size = list->size + 1;
+        return;
+    }
 
     // Find the last node
     while(current->next != NULL) {
@@ -57,14 +64,18 @@ void preppend(LList * list, int value) {
     Node * current = list->head;
     Node * newNode = createNode(value);
 
+    // if list is empty, next points to NULL
+    if(list->size > 0) newNode->next = list->head;
     // Set new node as head
-    newNode->next = list->head;
     list->head = newNode;
     list->size = list->size + 1;
     return;
 }
 
 int unstack(LList * list) {
+
+    if(list->size == 0) return 0;
+
     Node * nodeToDelete = list->head;
     int returnValue = nodeToDelete->value;
 
